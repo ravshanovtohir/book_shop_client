@@ -1,0 +1,53 @@
+@mixin list-unstyled {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+@mixin breakpoint-down($max-lg) {
+  @media only screen and (max-width: $max-lg) {
+    @content;
+  }
+}
+
+@mixin breakpoint-up($max-xs) {
+  @media only screen and (max-width: $max-xs) {
+    @content;
+  }
+}
+
+@mixin before-after ($bg-repeat: no-repeat, 
+                     $bg-size: contain,
+                     $inline-block: inline-block, 
+                     $widths: 300px, 
+                     $heights: 100px 
+                     ) {
+  content: "";
+  background-repeat: $bg-repeat;
+  background-size: $bg-size;
+  display: $inline-block;
+  width: $widths;
+  height: $heights;
+}
+
+@mixin font-body ($ft-family: $font-body,
+                  $ft-weight: 400,
+                  $ft-size: 16px,
+                  $ft-color: #000) {
+  
+  font-family: $ft-family;
+  font-weight: $ft-weight;
+  font-size: $ft-size;
+  color: $ft-color;
+}
+
+@mixin font-inter ($ft-family: $font-inter,
+              $ft-weight: 400,
+              $ft-size: 16px,
+              $ft-color: #000) {
+  
+  font-family: $ft-family;
+  font-weight: $ft-weight;
+  font-size: $ft-size;
+  color: $ft-color;
+}

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script src="js/utils.js"></script>
+    <script>
+        const token = window.localStorage.getItem('token')
+        if (!token) window.location = '/login'
+    </script>
+    <script>
+        let is = window.localStorage.getItem("is")
+        console.log(is);
+        if (is == false || is == "false") {
+            window.location = "/"
+        }
+    </script>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/main.min.css">
+</head>
+
+<body>
+    <div class="container mt-4">
+        <div class="row">
+            <h5 class="display-4 text-center">My Book</h5>
+        </div>
+        <div class="modal-header">
+            <span id="errorMessage"></span>
+        </div>
+        <form id="book-form" class="mb-4">
+            <div class="form-group mb-2">
+                <label for="title">Book Title</label>
+                <input type="text" id="title" class="form-control">
+            </div>
+            <div class="form-group mb-2">
+                <label for="title">Book Author</label>
+                <input type="text" id="author" class="form-control">
+            </div>
+            <div class="form-group mb-2">
+                <label for="title">Price</label>
+                <input type="text" id="price" class="form-control">
+            </div>
+            <div class="form-group mb-2">
+                <label for="title">Short Description</label>
+                <input type="text" id="short" class="form-control">
+            </div>
+            <div class="form-group mb-2">
+                <label for="title">Long Description</label>
+                <input type="text" id="long" class="form-control">
+            </div>
+            <div class="form-group mb-2">
+                <label for="title">Book Photo</label>
+                <input type="file" id="uploadInput" accept="image/*" class="form-control">
+            </div>
+            <div class="form-group mb-2">
+                <label for="title">Book File</label>
+                <input type="file" id="uploadInputBook" class="form-control">
+            </div>
+            <div class="form-group mb-2">
+                <label for="type">Category</label>
+                <input type="text" id="type" class="form-control" list="date">
+                <datalist id="date">
+                    <script>
+                        async function renderCategorys(){
+                            let datalist = document.querySelector("#date")
+                            const res = await request('/category')
+                            for(let i of res.categories){
+                                let option = document.createElement("option")
+                                option.innerHTML = i.category_name
+                                datalist.append(option)
+                            }
+                        }
+                        renderCategorys()
+                    </script>
+                    <!-- <option>Badiiy</option>
+                    <option>Biznes</option>
+                    <option>Ertak kitoblar</option> -->
+                </datalist>
+            </div>
+            <input id="addBook" value="Book add" class="btn btn-primary btn-book">
+
+            <h5>Other pages for Admin</h5>
+
+            <button id="addCategory" value="Home" class="btn btn-primary btn-book">
+                Add Category
+                <script>
+                    addCategory.onclick = async event => {
+                        event.preventDefault()
+                        setTimeout(() => {
+                            window.location = "/addCategory"
+                        }, 1000)
+                    }
+                </script>
+            </button>
+
+            <button id="home" value="Home" class="btn btn-primary btn-book">
+                Home
+                <script>
+                    home.onclick = async event => {
+                        event.preventDefault()
+                        setTimeout(() => {
+                            window.location = "/"
+                        }, 1000)
+                    }
+                </script>
+            </button>
+
+
+
+        </form>
+        <!-- <div class="btn-group mb-2" role="group" aria-label="Basic example">
+            <button type="button" class="btn btn-primary">Hammasi</button>
+            <button type="button" class="btn btn-primary">Badiiy</button>
+            <button type="button" class="btn btn-primary">Biznes</button>
+            <button type="button" class="btn btn-primary">Diniy</button>
+        </div> -->
+        <div class="block w-50">
+            <ul class="list-group">
+                <!-- <li class="list-group-item">Ikki eshik orasi <span class="float-end badge bg-info">Badiiy</span></li>
+        <li class="list-group-item">Ikki eshik orasi <span class="float-end badge bg-info">Badiiy</span></li>
+        <li class="list-group-item">Ikki eshik orasi <span class="float-end badge bg-info">Badiiy</span></li>
+        <li class="list-group-item">Ikki eshik orasi <span class="float-end badge bg-info">Badiiy</span></li> -->
+            </ul>
+        </div>
+    </div>
+
+
+    <script src="js/main.js"></script>
+    <script src="js/admin.js"></script>
+</body>
+
+</html>
